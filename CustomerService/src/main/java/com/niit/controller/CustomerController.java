@@ -1,19 +1,19 @@
 package com.niit.controller;
 
+import com.niit.exception.CustomerAlreadyExistsException;
+import com.niit.exception.InvalidCredentialsException;
 import com.niit.model.Customer;
 import com.niit.service.CustomerService;
 import com.niit.service.SecurityTokenGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/customer")
 public class CustomerController {
 
@@ -24,36 +24,32 @@ public class CustomerController {
 
 
     @PostMapping("/register")
-    public Customer customerReister(@RequestBody Customer customer) throws Exception {
-        String tempororyEmaiId=customer.getEmailId();
-        if(tempororyEmaiId !=null && !"".equals(tempororyEmaiId)){
-            Customer obj=service.getCustomerByEmailId(tempororyEmaiId);
-            if (obj != null){
-                throw new Exception("Customer with this "+tempororyEmaiId+" is already in use please chose another EmailId");
-            }
+    public ResponseEntity<?>  customerRegister(@RequestBody Customer customer)  {
+        try{
+            return new ResponseEntity<>(service.saveCustomer(customer),HttpStatus.CREATED);
+        } catch (CustomerAlreadyExistsException customerAlreadyExistsException){
+            return new ResponseEntity<>("Email id is already registered",HttpStatus.CONFLICT);
+        }catch(Exception e){
+            return new ResponseEntity<>(e.toString(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        Customer obj1=null;//taking one variable
-        obj1=service.saveCustomer(customer);
-        return obj1;
+
     }
 
     @PostMapping("/login")
-    public ResponseEntity loginUser(@RequestBody Customer customer) throws Exception {
-        ResponseEntity<?> responseEntity;
-        String tempEmail = customer.getEmailId();
-        String tempPassword = customer.getPassword();
-        Map<String, String> map = null;
-        try {
-            Customer customer1 = service.getCustomerByEmailIdAndUserPassword(tempEmail,tempPassword);
-            if (customer1.getEmailId().equals(customer.getEmailId())) {
-                map = securityTokenGenerator.generateToken(customer);
+    public ResponseEntity loginCustomer(@RequestBody Customer customer)  {
+        try{
+            Customer retrievedCustomer = service.getCustomerByEmailIdAndUserPassword(customer.getEmailId(),customer.getPassword());
+            if(retrievedCustomer==null)
+            {
+                throw new InvalidCredentialsException();
             }
-            responseEntity = new ResponseEntity(map, HttpStatus.OK);
+        }catch (InvalidCredentialsException invalidCredentialsException){
+            return new ResponseEntity<>("Invalid Credentials",HttpStatus.UNAUTHORIZED);
+        }catch(Exception e){
+            return new ResponseEntity<>(e.toString(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        catch (Exception e){
-            responseEntity = new ResponseEntity("Try after sometime!!!", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        return responseEntity;
+        Map<String,String> map = securityTokenGenerator.generateToken(customer);
+        return new ResponseEntity<>(map,HttpStatus.OK);
     }
 
 }

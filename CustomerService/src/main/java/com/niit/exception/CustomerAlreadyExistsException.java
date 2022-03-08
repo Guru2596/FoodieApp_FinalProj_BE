@@ -3,6 +3,6 @@ package com.niit.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(value = HttpStatus.CONFLICT,reason = "Invalid credentials")
-public class CustomerAlreadyExistsException extends Throwable {
+@ResponseStatus(value = HttpStatus.CONFLICT)
+public class CustomerAlreadyExistsException extends Exception {
 }
