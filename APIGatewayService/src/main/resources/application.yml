@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: api-gateway-service
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:4200"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - PATCH
+              - OPTIONS
+            allowedHeaders: "Content-Type"
+  main:
+    web-application-type: reactive
+server:
+  port: '9000'
