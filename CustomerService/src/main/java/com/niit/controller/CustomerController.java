@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/api/customer")
 public class CustomerController {
 
@@ -36,7 +35,7 @@ public class CustomerController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity loginCustomer(@RequestBody Customer customer)  {
+    public ResponseEntity<?> loginCustomer(@RequestBody Customer customer)  {
         try{
             Customer retrievedCustomer = service.getCustomerByEmailIdAndUserPassword(customer.getEmailId(),customer.getPassword());
             if(retrievedCustomer==null)
@@ -49,7 +48,7 @@ public class CustomerController {
             return new ResponseEntity<>(e.toString(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
         Map<String,String> map = securityTokenGenerator.generateToken(customer);
-        return new ResponseEntity<>(map,HttpStatus.OK);
+        return new ResponseEntity<>(map,HttpStatus.CREATED);
     }
 
 }

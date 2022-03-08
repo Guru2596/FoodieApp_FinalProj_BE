@@ -8,8 +8,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="EurekaServer" />
-        <module name="APIGatewayService" />
+        <module name="FavouriteService" />
         <module name="CustomerService" />
+        <module name="RestaurantService" />
+        <module name="APIGatewayService" />
       </profile>
     </annotationProcessing>
   </component>
@@ -18,6 +20,8 @@
       <module name="APIGatewayService" options="-parameters" />
       <module name="CustomerService" options="-parameters" />
       <module name="EurekaServer" options="-parameters" />
+      <module name="FavouriteService" options="-parameters" />
+      <module name="RestaurantService" options="-parameters" />
     </option>
   </component>
 </project>

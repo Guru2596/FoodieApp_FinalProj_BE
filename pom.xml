@@ -64,6 +64,8 @@
 
   <modules>
     <module>CustomerService</module>
+    <module>RestaurantService</module>
+    <module>FavouriteService</module>
     <module>APIGatewayService</module>
     <module>EurekaServer</module>
   </modules>
