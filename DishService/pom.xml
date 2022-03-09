@@ -8,10 +8,10 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 	<groupId>com.niit</groupId>
-	<artifactId>RestaurantService</artifactId>
+	<artifactId>DishService</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>RestaurantService</name>
-	<description>Microservices for CRUD operation for restaurants</description>
+	<name>DishService</name>
+	<description>Microservice for CRUD operation for dishes</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -20,28 +20,20 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-amqp</artifactId>
-		</dependency>
 	</dependencies>
+
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
+					<source>8</source>
+					<target>8</target>
 				</configuration>
 			</plugin>
 		</plugins>

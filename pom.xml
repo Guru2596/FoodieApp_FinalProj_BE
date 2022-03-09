@@ -5,7 +5,7 @@
   <groupId>com.niit</groupId>
   <artifactId>FoodieApp_FinalProj_BE</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>ShoppingApplication</name>
+  <name>FoodieApp_FinalProj_BE</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
@@ -66,6 +66,9 @@
     <module>CustomerService</module>
     <module>RestaurantService</module>
     <module>FavouriteService</module>
+    <module>DishService</module>
+    <module>SearchService</module>
+    <module>AdminService</module>
     <module>APIGatewayService</module>
     <module>EurekaServer</module>
   </modules>

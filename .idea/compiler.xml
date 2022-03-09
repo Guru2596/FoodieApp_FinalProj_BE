@@ -10,6 +10,9 @@
         <module name="EurekaServer" />
         <module name="FavouriteService" />
         <module name="CustomerService" />
+        <module name="AdminService" />
+        <module name="SearchService" />
+        <module name="DishService" />
         <module name="RestaurantService" />
         <module name="APIGatewayService" />
       </profile>
@@ -18,10 +21,13 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="APIGatewayService" options="-parameters" />
+      <module name="AdminService" options="-parameters" />
       <module name="CustomerService" options="-parameters" />
+      <module name="DishService" options="-parameters" />
       <module name="EurekaServer" options="-parameters" />
       <module name="FavouriteService" options="-parameters" />
       <module name="RestaurantService" options="-parameters" />
+      <module name="SearchService" options="-parameters" />
     </option>
   </component>
 </project>
