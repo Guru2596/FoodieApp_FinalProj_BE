@@ -36,7 +36,7 @@ public class RestaurantServiceTest {
     RestaurantAddress restaurantAddress1, restaurantAddress2, restaurantAddress3;
 
     Dish dish1 = new Dish(1,"Idly","veg",40);
-    Dish dish2 = new Dish(1,"Idly","veg",40);
+    Dish dish2 = new Dish(2,"Dosa","veg",50);
 
     @BeforeEach
     void setUp(){

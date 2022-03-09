@@ -12,4 +12,5 @@ public class DishDTO {
     private String dishName;
     private int dishPrice;
     private String dishCategory;
+//    private int restaurantId;
 }

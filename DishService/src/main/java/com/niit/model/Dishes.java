@@ -16,6 +16,5 @@ public class Dishes {
     private String dishName;
     private int dishPrice;
     private String dishCategory;
-
 }
 

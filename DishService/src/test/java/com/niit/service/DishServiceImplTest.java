@@ -26,6 +26,7 @@ public class DishServiceImplTest {
     @Mock
     private DishRepository dishRepository;
 
+
     @InjectMocks
     private DishServiceImpl dishService;
 
@@ -37,7 +38,7 @@ public class DishServiceImplTest {
 
         dishes1=new Dishes(1,"idly",40,"Breakfast");
         dishes2=new Dishes(2,"dosa",40,"Breakfast");
-        dishes3=new Dishes(3,"puri",40,"Breakfast");
+        dishes3=new Dishes(3,"purii",40,"Breakfast");
         dishesList=Arrays.asList(dishes1,dishes2,dishes3);
 
     }

@@ -20,6 +20,6 @@ public class MessageProducer {
     }
 
     public void sendMessageToRabbitTemplate(DishDTO dishDTO){
-        rabbitTemplate.convertAndSend(directExchange.getName(),"dishes_routing",dishDTO);
+        rabbitTemplate.convertAndSend(directExchange.getName(), "dishes_routing",dishDTO);
     }
 }

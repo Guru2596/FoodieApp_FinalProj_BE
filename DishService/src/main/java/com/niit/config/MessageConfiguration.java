@@ -17,29 +17,22 @@ public class MessageConfiguration {
 
     private static final String registerQueue = "dishes_queue";
     private static final String exchangeName = "dishes_exchange";
-    private static final String dishes_routing = "dishes_routing";
+    private static final String dishesRouting = "dishes_routing";
 
     @Bean
     public Queue registerQueue(){
         return new Queue(registerQueue,false);
     }
 
-    //simple container collecting information to describe a direct exchange. Used in conjunction with administrative operations.
     @Bean
     public DirectExchange directExchange(){
         return new DirectExchange(exchangeName);
     }
 
-    //JSON converter that uses the Jackson 2 Json library.
     @Bean
     public Jackson2JsonMessageConverter producerJackson2JsonConverter(){
         return new Jackson2JsonMessageConverter();
     }
-
-//
-//    public interface ConnectionFactory
-//An interface based ConnectionFactory for creating Connections.
-    //RabbitTemplate ->Helper class that simplifies synchronous RabbitMQ access (sending and receiving messages).
 
     @Bean
     public RabbitTemplate rabbitTemplate (ConnectionFactory connectionFactory){
@@ -51,7 +44,7 @@ public class MessageConfiguration {
     @Bean
     public Binding bindingCustomer (Queue registerQueue, DirectExchange directExchange){
 
-        return BindingBuilder.bind(registerQueue).to(directExchange).with(dishes_routing);
+        return BindingBuilder.bind(registerQueue).to(directExchange).with(dishesRouting);
     }
 
 }
