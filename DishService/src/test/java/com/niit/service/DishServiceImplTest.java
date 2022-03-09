@@ -28,8 +28,8 @@ public class DishServiceImplTest {
 
     @InjectMocks
     private DishServiceImpl dishService;
+
     private Dishes dishes1,dishes2,dishes3;
-//    Dishes dishesList;
     List<Dishes> dishesList;
 
     @BeforeEach
@@ -38,7 +38,7 @@ public class DishServiceImplTest {
         dishes1=new Dishes(1,"idly",40,"Breakfast");
         dishes2=new Dishes(2,"dosa",40,"Breakfast");
         dishes3=new Dishes(3,"puri",40,"Breakfast");
-         dishesList=Arrays.asList(dishes1,dishes2,dishes3);
+        dishesList=Arrays.asList(dishes1,dishes2,dishes3);
 
     }
 
@@ -55,7 +55,7 @@ public class DishServiceImplTest {
         when(dishRepository.save(any())).thenReturn(dishes1);
         assertEquals(dishes1,dishService.addDishesToDb(dishes1));
         verify(dishRepository,times(1)).save(any());
-         verify(dishRepository,times(1)).findById(any());
+        verify(dishRepository,times(1)).findById(any());
 
     }
 

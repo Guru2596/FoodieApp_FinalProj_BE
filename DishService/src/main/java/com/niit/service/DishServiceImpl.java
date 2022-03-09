@@ -1,6 +1,7 @@
 package com.niit.service;
 
 
+import com.niit.exception.DishAlreadyExistsException;
 import com.niit.model.Dishes;
 import com.niit.repostiory.DishRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,10 @@ public class DishServiceImpl implements DishServices {
     DishRepository dishRepository;
 
     @Override
-    public Dishes addDishesToDb(Dishes dishes) {
+    public Dishes addDishesToDb(Dishes dishes) throws DishAlreadyExistsException {
+        if(dishRepository.findById(dishes.getDishId()).isPresent()){
+            throw new DishAlreadyExistsException();
+        }
         return dishRepository.save(dishes);
     }
 

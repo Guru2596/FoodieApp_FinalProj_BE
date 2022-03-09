@@ -1,6 +1,7 @@
 package com.niit.controller;
 
 
+import com.niit.exception.DishAlreadyExistsException;
 import com.niit.model.Dishes;
 import com.niit.service.DishServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class DishController {
     DishServices dishServices;
 
     @PostMapping("/addDishes")
-    public Dishes addDishes(@RequestBody Dishes dishes) {
+    public Dishes addDishes(@RequestBody Dishes dishes) throws DishAlreadyExistsException {
         return dishServices.addDishesToDb(dishes);
     }
 //    public Dishes searchDishesById(@PathVariable int id){
