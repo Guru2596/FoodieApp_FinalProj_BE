@@ -36,9 +36,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class CustomerControllerTest {
 
     private Customer customer;
-    private Map<String, String> tokenMap;
-
-
     @Mock
     private CustomerServiceImpl customerService;
     @Mock
@@ -51,21 +48,14 @@ class CustomerControllerTest {
     private MockMvc mockMvc;
 
 
-
-
-
     @BeforeEach
     void setUp() {
         customer = new Customer("test@gmail.com","test",9999958690l,"test.jpg",1,"test");
-        tokenMap = new HashMap<String, String>();
-        tokenMap.put("token", "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjMiLCJpYXQiOjE2NDY3Mzc1NzR9.9CPUNYOQzOdQODsp8wHWbz1KxyACx61ZTCphi3k9vAU");
-        tokenMap.put("message", "Customer Successfully Logged In...!");
         mockMvc = MockMvcBuilders.standaloneSetup(customerController).build();
     }
     @AfterEach
     void tearDown() {
         customer = null;
-        tokenMap.clear();
     }
 
     @Test
@@ -81,18 +71,17 @@ class CustomerControllerTest {
     @Test
     public void customerLoginToReturnSuccess() throws Exception {
         when(customerService.getCustomerByEmailIdAndUserPassword(any(),any())).thenReturn(customer);
-        mockMvc.perform(post("/api/customer/login")//mockCall
+        mockMvc.perform(post("/api/customer/login")//mockhttpservletrequest
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(jsonToString(customer)))
-                .andExpect(status().isCreated()).andDo(MockMvcResultHandlers.print());
+                        .content(jsonToString(customer)))//, convert json to string and than expect.
+                .andExpect(status().isOk()).andDo(MockMvcResultHandlers.print());
         verify(securityTokenGenerator,times(1)).generateToken(any());
 
     }
 
 
-    private static String jsonToString(final Object ob) throws JsonProcessingException {
+    private static String jsonToString(final Object ob)  {
         String result;
-
         try {
             ObjectMapper mapper = new ObjectMapper();
             String jsonContent = mapper.writeValueAsString(ob);
@@ -100,7 +89,6 @@ class CustomerControllerTest {
         } catch(JsonProcessingException e) {
             result = "JSON processing error";
         }
-
         return result;
     }
 }

@@ -48,7 +48,7 @@ public class CustomerController {
             return new ResponseEntity<>(e.toString(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
         Map<String,String> map = securityTokenGenerator.generateToken(customer);
-        return new ResponseEntity<>(map,HttpStatus.CREATED);
+        return new ResponseEntity<>(map,HttpStatus.OK);
     }
 
 }
