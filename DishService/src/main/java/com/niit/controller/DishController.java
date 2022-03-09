@@ -2,7 +2,7 @@ package com.niit.controller;
 
 
 import com.niit.exception.DishAlreadyExistsException;
-import com.niit.model.Dishes;
+import com.niit.model.Dish;
 import com.niit.service.DishServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,15 +20,15 @@ public class DishController {
     DishServices dishServices;
 
     @PostMapping("/addDishes")
-    public Dishes addDishes(@RequestBody Dishes dishes) throws DishAlreadyExistsException {
+    public Dish addDishes(@RequestBody Dish dishes) throws DishAlreadyExistsException {
         return dishServices.addDishesToDb(dishes);
     }
 //    public Dishes searchDishesById(@PathVariable int id){
 //        return DishServices.searchDishesById(id).get();
 //    }
 @GetMapping("/getdishes")
-public List<Dishes> getDishes()  {
-    List<Dishes> dish = new ArrayList<>();
+public List<Dish> getDishes()  {
+    List<Dish> dish = new ArrayList<>();
     dish= dishServices.viewDishes();
     return dish;
 }

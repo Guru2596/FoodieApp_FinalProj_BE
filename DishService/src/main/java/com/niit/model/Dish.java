@@ -1,18 +1,20 @@
 package com.niit.model;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Data
-@AllArgsConstructor
+@Document
 @NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Dish {
-
+    @Id
     private int dishId;
     private String dishName;
-    private String dishCategory;
     private int dishPrice;
-
+    private String dishCategory;
 }
+

@@ -3,7 +3,7 @@ package com.niit.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.niit.exception.DishAlreadyExistsException;
-import com.niit.model.Dishes;
+import com.niit.model.Dish;
 import com.niit.service.DishServiceImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,7 +21,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -37,16 +36,16 @@ class DishControllerTest {
 
     @Mock
     private DishServiceImpl dishService;
-    private Dishes dishes1, dishes2;
-    List<Dishes> dishesList;
+    private Dish dishes1, dishes2;
+    List<Dish> dishesList;
 
     @InjectMocks
     private DishController dishController;
 
     @BeforeEach
     void setUp() {
-        dishes1 = new Dishes(1,"idly",40,"Breakfast");
-        dishes2 = new Dishes(1,"dosa",40,"Breakfast");
+        dishes1 = new Dish(1,"idly",40,"Breakfast");
+        dishes2 = new Dish(1,"dosa",40,"Breakfast");
         dishesList= Arrays.asList(dishes1,dishes2);
         mockMvc = MockMvcBuilders.standaloneSetup(dishController).build();
 

@@ -1,5 +1,6 @@
 package com.niit.rabbitmq.domain;
 
+import com.niit.model.RestaurantAddress;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,9 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DishDTO {
-    private int dishId;
-    private String dishName;
-    private int dishPrice;
-    private String dishCategory;
-//    private int restaurantId;
+    private int restaurantId;
+    private String restaurantName;
+    private RestaurantAddress restaurantAddress;
+    private String typeOfRestaurant;
+    private String image;
+
 }

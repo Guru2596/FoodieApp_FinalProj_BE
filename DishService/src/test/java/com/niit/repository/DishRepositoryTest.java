@@ -1,6 +1,6 @@
 package com.niit.repository;
 
-import com.niit.model.Dishes;
+import com.niit.model.Dish;
 import com.niit.repostiory.DishRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,14 +18,14 @@ import static org.junit.jupiter.api.Assertions.*;
 @DataMongoTest
 class DishRepositoryTest {
 
-    private Dishes dishes;
+    private Dish dishes;
 
     @Autowired
     private DishRepository dishRepository;
 
     @BeforeEach
     void setUp() {
-        dishes = new Dishes(1,"idly",40,"Breakfast");
+        dishes = new Dish(1,"idly",40,"Breakfast");
     }
 
 
@@ -38,7 +38,7 @@ class DishRepositoryTest {
     @Test
     public void givenProductToDeleteShouldDeleteProduct(){
         dishRepository.insert(dishes);
-        Dishes product1 = dishRepository.findById(dishes.getDishId()).get();
+        Dish product1 = dishRepository.findById(dishes.getDishId()).get();
 
         dishRepository.delete(product1);
         assertEquals(Optional.empty(),dishRepository.findById(dishes.getDishId()));

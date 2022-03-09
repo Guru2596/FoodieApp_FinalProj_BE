@@ -1,6 +1,6 @@
 package com.niit.service;
 
-import com.niit.model.Dishes;
+import com.niit.model.Dish;
 import com.niit.repostiory.DishRepository;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.AfterEach;
@@ -30,15 +30,15 @@ public class DishServiceImplTest {
     @InjectMocks
     private DishServiceImpl dishService;
 
-    private Dishes dishes1,dishes2,dishes3;
-    List<Dishes> dishesList;
+    private Dish dishes1,dishes2,dishes3;
+    List<Dish> dishesList;
 
     @BeforeEach
     void setUp(){
 
-        dishes1=new Dishes(1,"idly",40,"Breakfast");
-        dishes2=new Dishes(2,"dosa",40,"Breakfast");
-        dishes3=new Dishes(3,"purii",40,"Breakfast");
+        dishes1=new Dish(1,"idly",40,"Breakfast");
+        dishes2=new Dish(2,"dosa",40,"Breakfast");
+        dishes3=new Dish(3,"purii",40,"Breakfast");
         dishesList=Arrays.asList(dishes1,dishes2,dishes3);
 
     }

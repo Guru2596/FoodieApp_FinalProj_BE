@@ -1,12 +1,12 @@
 package com.niit.service;
 
 import com.niit.exception.DishAlreadyExistsException;
-import com.niit.model.Dishes;
+import com.niit.model.Dish;
 
 import java.util.List;
 
 public interface DishServices {
-   Dishes addDishesToDb(Dishes dishes) throws DishAlreadyExistsException;
-   List<Dishes> viewDishes();
+   Dish addDishesToDb(Dish dishes) throws DishAlreadyExistsException;
+   List<Dish> viewDishes();
    String deleteDishesById(int id) throws Exception;
 }
