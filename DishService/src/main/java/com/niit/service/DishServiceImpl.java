@@ -1,8 +1,10 @@
 package com.niit.service;
 
 
+import com.niit.config.MessageProducer;
 import com.niit.exception.DishAlreadyExistsException;
 import com.niit.model.Dishes;
+import com.niit.rabbitmq.domain.DishDTO;
 import com.niit.repostiory.DishRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,14 +13,23 @@ import java.util.List;
 
 @Service
 public class DishServiceImpl implements DishServices {
+
+    private DishRepository dishRepository;
+    private MessageProducer messageProducer;
+
     @Autowired
-    DishRepository dishRepository;
+    public DishServiceImpl(DishRepository dishRepository, MessageProducer messageProducer) {
+        this.dishRepository = dishRepository;
+        this.messageProducer = messageProducer;
+    }
 
     @Override
     public Dishes addDishesToDb(Dishes dishes) throws DishAlreadyExistsException {
         if(dishRepository.findById(dishes.getDishId()).isPresent()){
             throw new DishAlreadyExistsException();
         }
+        DishDTO dishDTO = new DishDTO(dishes.getDishId(),dishes.getDishName(),dishes.getDishPrice(),dishes.getDishCategory());
+        messageProducer.sendMessageToRabbitTemplate(dishDTO);
         return dishRepository.save(dishes);
     }
 

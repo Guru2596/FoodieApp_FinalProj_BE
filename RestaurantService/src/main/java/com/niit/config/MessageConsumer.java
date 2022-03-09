@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class MessageConsumer {
     @Autowired
     private RestaurantServiceImpl restaurantService;
-    @RabbitListener(queues = "dish_queue")
+    @RabbitListener(queues = "dishes_queue")
     public void getCustomerFromRabbitMQ(DishDTO dishDTO){
         try {
             Dish dish = new Dish(dishDTO.getDishId(), dishDTO.getDishName(), dishDTO.getDishCategory(), dishDTO.getDishPrice());
